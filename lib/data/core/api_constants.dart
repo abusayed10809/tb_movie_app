@@ -6,4 +6,7 @@ class ApiConstants{
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
   static const String trendingUrl = "$baseUrl/trending/movie/day?api_key=$apiKey";
+  static const String popularUrl = "$baseUrl/movie/popular?api_key=$apiKey";
+  static const String comingSoonUrl = "$baseUrl/movie/upcoming?api_key=$apiKey";
+  static const String playingNowUrl = "$baseUrl/movie/now_playing?api_key=$apiKey";
 }

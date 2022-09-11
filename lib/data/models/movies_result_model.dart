@@ -1,4 +1,5 @@
 
+import 'package:tb_movie_app/common/helper_functions.dart';
 import 'package:tb_movie_app/data/models/movie_model.dart';
 
 class MovieResultModel {
