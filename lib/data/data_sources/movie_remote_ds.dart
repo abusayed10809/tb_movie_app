@@ -7,10 +7,10 @@ import 'package:tb_movie_app/data/models/movie_model.dart';
 import 'package:tb_movie_app/data/models/movies_result_model.dart';
 
 abstract class MovieRemoteDataSource{
-  Future<List<MovieModel>?> getTrending();
-  Future<List<MovieModel>?> getPopular();
-  Future<List<MovieModel>?> getPlayingNow();
-  Future<List<MovieModel>?> getComingSoon();
+  Future<List<MovieModel>> getTrending();
+  Future<List<MovieModel>> getPopular();
+  Future<List<MovieModel>> getPlayingNow();
+  Future<List<MovieModel>> getComingSoon();
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource{
@@ -19,48 +19,60 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource{
   MovieRemoteDataSourceImpl(this._client);
 
   @override
-  Future<List<MovieModel>?> getTrending() async{
+  Future<List<MovieModel>> getTrending() async{
     try{
       final decodedResponse = await _client.get(ApiConstants.trendingUrl);
-      final movies = MovieResultModel.fromJson(decodedResponse);
-      logMessage('${movies.movies}');
-      return movies.movies;
+      final movies = MovieResultModel.fromJson(decodedResponse).movies;
+      if(movies!=null){
+        return movies;
+      } else{
+        throw Exception("movie field null");
+      }
     } catch(error){
       throw Exception("model conversion failed");
     }
   }
 
   @override
-  Future<List<MovieModel>?> getPopular() async{
+  Future<List<MovieModel>> getPopular() async{
     try{
       final decodedResponse = await _client.get(ApiConstants.popularUrl);
-      final movies = MovieResultModel.fromJson(decodedResponse);
-      logMessage('${movies.movies}');
-      return movies.movies;
+      final movies = MovieResultModel.fromJson(decodedResponse).movies;
+      if(movies!=null){
+        return movies;
+      } else{
+        throw Exception("movie field null");
+      }
     } catch(error){
       throw Exception("model conversion failed");
     }
   }
 
   @override
-  Future<List<MovieModel>?> getComingSoon() async{
+  Future<List<MovieModel>> getComingSoon() async{
     try{
       final decodedResponse = await _client.get(ApiConstants.comingSoonUrl);
-      final movies = MovieResultModel.fromJson(decodedResponse);
-      logMessage('${movies.movies}');
-      return movies.movies;
+      final movies = MovieResultModel.fromJson(decodedResponse).movies;
+      if(movies!=null){
+        return movies;
+      } else{
+        throw Exception("movie field null");
+      }
     } catch(error){
       throw Exception("model conversion failed");
     }
   }
 
   @override
-  Future<List<MovieModel>?> getPlayingNow() async{
+  Future<List<MovieModel>> getPlayingNow() async{
     try{
       final decodedResponse = await _client.get(ApiConstants.playingNowUrl);
-      final movies = MovieResultModel.fromJson(decodedResponse);
-      logMessage('${movies.movies}');
-      return movies.movies;
+      final movies = MovieResultModel.fromJson(decodedResponse).movies;
+      if(movies!=null){
+        return movies;
+      } else{
+        throw Exception("movie field null");
+      }
     } catch(error){
       throw Exception("model conversion failed");
     }

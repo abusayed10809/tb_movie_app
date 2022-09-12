@@ -9,7 +9,7 @@ class MovieResultModel {
   int? totalResults;
 
   MovieResultModel(
-      {this.page, this.movies, this.totalPages, this.totalResults});
+      {this.page, required this.movies, this.totalPages, this.totalResults});
 
   MovieResultModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
