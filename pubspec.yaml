@@ -31,6 +31,12 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   get_it: ^7.2.0
+  flutter_screenutil: ^5.5.4
+  google_fonts: ^3.0.1
+  flutter_bloc: ^8.1.1
+  flutter_svg: ^1.1.5
+  cached_network_image: ^3.2.2
+
   flutter:
     sdk: flutter
 
@@ -60,6 +66,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/svgs/
+    - assets/pngs/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

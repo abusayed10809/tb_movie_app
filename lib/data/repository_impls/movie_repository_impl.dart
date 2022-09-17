@@ -9,6 +9,7 @@ import 'package:tb_movie_app/domain/repositories/movie_repository.dart';
 class MovieRepositoryImpl extends MovieRepository {
   final MovieRemoteDataSource movieRemoteDataSource;
   MovieRepositoryImpl(this.movieRemoteDataSource);
+
   @override
   Future<Either<AppError, List<MovieModel>>> getTrending() async {
     try {
@@ -20,7 +21,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getComingSoon() async{
+  Future<Either<AppError, List<MovieEntity>>> getComingSoon() async {
     try {
       final movies = await movieRemoteDataSource.getComingSoon();
       return Right(movies);
@@ -30,7 +31,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getPlayingNow() async{
+  Future<Either<AppError, List<MovieEntity>>> getPlayingNow() async {
     try {
       final movies = await movieRemoteDataSource.getPlayingNow();
       return Right(movies);
@@ -40,7 +41,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getPopular() async{
+  Future<Either<AppError, List<MovieEntity>>> getPopular() async {
     try {
       final movies = await movieRemoteDataSource.getPopular();
       return Right(movies);
