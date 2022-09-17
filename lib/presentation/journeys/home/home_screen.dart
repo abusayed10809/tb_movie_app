@@ -4,6 +4,7 @@ import 'package:tb_movie_app/common/enums.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 
@@ -17,12 +18,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late MovieCarouselBloc movieCarouselBloc;
   late MovieBackdropBloc movieBackdropBloc;
+  late MovieTabBloc movieTabBloc;
 
   @override
   void initState() {
     super.initState();
     movieCarouselBloc = getItInstance<MovieCarouselBloc>();
     movieCarouselBloc.add(const MovieCarouselLoadEvent());
+
+    movieTabBloc = getItInstance<MovieTabBloc>();
 
     movieBackdropBloc = movieCarouselBloc.movieBackdropBloc;
   }
@@ -32,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
     movieCarouselBloc.close();
     movieBackdropBloc.close();
+    movieTabBloc.close();
   }
 
   @override
@@ -43,6 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider(
           create: (context) => movieBackdropBloc,
+        ),
+        BlocProvider(
+          create: (context) => movieTabBloc,
         ),
       ],
       child: Scaffold(
