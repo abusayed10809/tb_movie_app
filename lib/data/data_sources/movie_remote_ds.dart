@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:tb_movie_app/common/helper_functions.dart';
+import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:http/http.dart';
 import 'package:tb_movie_app/data/core/api_client.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';

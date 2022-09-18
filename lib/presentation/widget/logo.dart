@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tb_movie_app/common/image_assets.dart';
+import 'package:tb_movie_app/common/constants/image_assets.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 
 class Logo extends StatelessWidget {

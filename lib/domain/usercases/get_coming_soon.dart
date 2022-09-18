@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:tb_movie_app/common/helper_functions.dart';
+import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/data/models/movie_model.dart';
 import 'package:tb_movie_app/domain/entities/app_error.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';

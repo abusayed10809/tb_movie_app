@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tb_movie_app/common/image_assets.dart';
+import 'package:tb_movie_app/common/constants/image_assets.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 import 'package:tb_movie_app/presentation/widget/logo.dart';
 
@@ -20,7 +20,7 @@ class MovieAppBar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: (){
-
+              Scaffold.of(context).openDrawer();
             },
             icon: SvgPicture.asset(
               ImageAssets.menu,

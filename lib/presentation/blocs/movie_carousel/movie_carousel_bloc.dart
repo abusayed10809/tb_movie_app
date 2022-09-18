@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:tb_movie_app/common/enums.dart';
+import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 import 'package:tb_movie_app/domain/entities/no_params.dart';
 import 'package:tb_movie_app/domain/usercases/get_trending.dart';

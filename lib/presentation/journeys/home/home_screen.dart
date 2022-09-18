@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tb_movie_app/common/enums.dart';
+import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
+import 'package:tb_movie_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
+import 'package:tb_movie_app/presentation/journeys/home/movie_tab/movie_tab_widget.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -54,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       child: Scaffold(
+        drawer: const NavigationDrawer(),
         body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
           builder: (context, state) {
             switch (state.networkStatus) {
@@ -78,9 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const FractionallySizedBox(
                       alignment: Alignment.bottomCenter,
                       heightFactor: 0.4,
-                      child: Placeholder(
-                        color: AppColor.greyColor,
-                      ),
+                      child: MovieTabWidget(),
                     ),
                   ],
                 );

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:tb_movie_app/common/helper_functions.dart';
+import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
