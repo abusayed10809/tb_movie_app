@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tb_movie_app/common/extensions/string_limiter_extension.dart';
+import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';
 
 class MovieTabCardWidget extends StatelessWidget {

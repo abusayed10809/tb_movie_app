@@ -36,6 +36,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_svg: ^1.1.5
   cached_network_image: ^3.2.1
+  flutter_localizations:
+    sdk: flutter
 
   flutter:
     sdk: flutter
@@ -70,6 +72,7 @@ flutter:
   assets:
     - assets/svgs/
     - assets/pngs/
+    - assets/languages/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
