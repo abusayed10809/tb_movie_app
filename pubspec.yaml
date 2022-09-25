@@ -36,6 +36,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_svg: ^1.1.5
   cached_network_image: ^3.2.1
+  wiredash: ^1.5.0
   flutter_localizations:
     sdk: flutter
 

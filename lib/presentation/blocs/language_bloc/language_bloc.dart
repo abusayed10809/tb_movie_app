@@ -13,6 +13,10 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
   }
 
   _onToggleLanguageEvent(ToggleLanguageEvent event, Emitter<LanguageState> emit) {
-    emit(state.copyWith(locale: Locale(event.languageEntity.code),),);
+    emit(
+      state.copyWith(
+        locale: Locale(event.languageEntity.code),
+      ),
+    );
   }
 }

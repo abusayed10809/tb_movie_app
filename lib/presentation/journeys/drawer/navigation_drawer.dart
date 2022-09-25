@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/languages.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/presentation/app_localizations.dart';
+import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:tb_movie_app/presentation/widget/logo.dart';
+import 'package:wiredash/wiredash.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -43,12 +46,17 @@ class NavigationDrawer extends StatelessWidget {
             ),
             NavigationExpandedListItem(
               title: TranslationConstants.language.langTranslate(context),
-              onPressed: () {},
               children: Languages.languages.map((e) => e.value).toList(),
+              onPressed: (index) {
+                BlocProvider.of<LanguageBloc>(context).add(ToggleLanguageEvent(Languages.languages[index]),);
+              },
             ),
             NavigationListItem(
               title: TranslationConstants.feedback.langTranslate(context),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                Wiredash.of(context).show();
+              },
             ),
             NavigationListItem(
               title: TranslationConstants.about.langTranslate(context),

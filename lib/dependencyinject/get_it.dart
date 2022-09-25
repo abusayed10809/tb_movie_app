@@ -8,6 +8,7 @@ import 'package:tb_movie_app/domain/usercases/get_coming_soon.dart';
 import 'package:tb_movie_app/domain/usercases/get_playing_now.dart';
 import 'package:tb_movie_app/domain/usercases/get_popular.dart';
 import 'package:tb_movie_app/domain/usercases/get_trending.dart';
+import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
@@ -35,4 +36,6 @@ Future init() async {
       getComingSoon: GetComingSoon(getItInstance()),
     ),
   );
+  
+  getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
 }
