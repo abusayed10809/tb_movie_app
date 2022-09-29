@@ -3,38 +3,50 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 
-class AppText{
+class AppText {
   const AppText._();
   static TextTheme get _poppinsTextTheme => GoogleFonts.poppinsTextTheme();
 
+  static TextStyle get _whiteHeadline6 => _poppinsTextTheme.headline6!.copyWith(
+        fontSize: 20.sp,
+        color: AppColor.whiteColor,
+      );
+
   static TextStyle get _whiteSubtitle1 => _poppinsTextTheme.subtitle1!.copyWith(
-    fontSize: 16.sp,
-    color: AppColor.whiteColor,
-  );
+        fontSize: 16.sp,
+        color: AppColor.whiteColor,
+      );
 
   static TextStyle get _whiteSubtitle2 => _poppinsTextTheme.subtitle2!.copyWith(
-    fontSize: 14.sp,
-    color: AppColor.whiteColor,
-  );
+        fontSize: 14.sp,
+        color: AppColor.whiteColor,
+      );
 
   static TextStyle get _whiteBodyText2 => _poppinsTextTheme.bodyText2!.copyWith(
-    fontSize: 14.sp,
-    color: AppColor.whiteColor,
-    wordSpacing: 0.25,
-    letterSpacing: 0.25,
-    height: 1.5,
-  );
+        fontSize: 14.sp,
+        color: AppColor.whiteColor,
+        wordSpacing: 0.25,
+        letterSpacing: 0.25,
+        height: 1.5,
+      );
+
+  static TextStyle get _whiteButton => _poppinsTextTheme.button!.copyWith(
+        fontSize: 14.sp,
+        color: AppColor.whiteColor,
+      );
 
   static getTextTheme() => TextTheme(
-    subtitle1: _whiteSubtitle1,
-    subtitle2: _whiteSubtitle2,
-    bodyText2: _whiteBodyText2,
-  );
+        headline6: _whiteHeadline6,
+        subtitle1: _whiteSubtitle1,
+        subtitle2: _whiteSubtitle2,
+        bodyText2: _whiteBodyText2,
+        button: _whiteButton,
+      );
 }
 
-extension ThemeTextExtension on TextTheme{
+extension ThemeTextExtension on TextTheme {
   TextStyle get royalBlueSubtitle2 => subtitle2!.copyWith(
-    color: AppColor.royalBlueColor,
-    fontWeight: FontWeight.w600,
-  );
+        color: AppColor.royalBlueColor,
+        fontWeight: FontWeight.w600,
+      );
 }
