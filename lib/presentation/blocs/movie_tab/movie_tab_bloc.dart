@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/domain/entities/app_error.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 import 'package:tb_movie_app/domain/entities/no_params.dart';
@@ -34,9 +35,24 @@ class MovieTabBloc extends Bloc<MovieTabEvent, MovieTabState> {
         moviesEither = await getComingSoon(NoParams());
         break;
     }
+
     moviesEither?.fold(
-      (errorMsg) => emit(state.copyWith(currentTabIndex: event.currentTabIndex)),
-      (movies) => emit(state.copyWith(currentTabIndex: event.currentTabIndex, movies: movies)),
+      (errorMsg) => emit(
+        state.copyWith(
+          currentTabIndex: event.currentTabIndex,
+          networkStatus: NetworkStatus.failure,
+          movies: null,
+          appErrorType: errorMsg.appErrorType,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          currentTabIndex: event.currentTabIndex,
+          networkStatus: NetworkStatus.success,
+          movies: movies,
+          appErrorType: null,
+        ),
+      ),
     );
   }
 }

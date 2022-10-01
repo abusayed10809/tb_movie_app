@@ -6,6 +6,7 @@ import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bl
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_drawer.dart';
+import 'package:tb_movie_app/presentation/widget/app_error_widget.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_tab/movie_tab_widget.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
@@ -87,7 +88,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
 
               case NetworkStatus.failure:
-                return const SizedBox.shrink();
+                return AppErrorWidget(
+                  onPressed: () {
+                    movieCarouselBloc.add(const MovieCarouselLoadEvent());
+                  },
+                  appErrorType: state.appErrorType!,
+                );
             }
           },
         ),

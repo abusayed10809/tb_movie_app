@@ -4,24 +4,34 @@ class MovieCarouselState extends Equatable {
   final NetworkStatus networkStatus;
   final int defaultIndex;
   final List<MovieEntity> movies;
-  final String errorMsg;
+  final AppErrorType? appErrorType;
 
   const MovieCarouselState({
     this.networkStatus = NetworkStatus.initial,
     this.defaultIndex = 0,
     this.movies = const <MovieEntity>[],
-    this.errorMsg = '',
+    this.appErrorType,
   });
 
-  MovieCarouselState copyWith({NetworkStatus? networkStatus, int? defaultIndex, List<MovieEntity>? movies, String? errorMsg}){
+  MovieCarouselState copyWith({
+    NetworkStatus? networkStatus,
+    int? defaultIndex,
+    List<MovieEntity>? movies,
+    AppErrorType? appErrorType,
+  }) {
     return MovieCarouselState(
       networkStatus: networkStatus ?? this.networkStatus,
       defaultIndex: defaultIndex ?? this.defaultIndex,
       movies: movies ?? this.movies,
-      errorMsg: errorMsg ?? this.errorMsg,
+      appErrorType: appErrorType ?? this.appErrorType,
     );
   }
 
   @override
-  List<Object?> get props => [networkStatus, defaultIndex, movies, errorMsg];
+  List<Object?> get props => [
+        networkStatus,
+        defaultIndex,
+        movies,
+        appErrorType,
+      ];
 }
