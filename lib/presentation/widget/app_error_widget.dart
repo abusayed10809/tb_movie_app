@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/domain/entities/app_error.dart';
-import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/widget/custom_button.dart';
 import 'package:wiredash/wiredash.dart';
 

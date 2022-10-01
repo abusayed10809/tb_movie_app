@@ -1,4 +1,4 @@
-class ApiConstants{
+class ApiConstants {
   ApiConstants._();
 
   static const String baseUrl = "https://api.themoviedb.org/3";
@@ -9,4 +9,5 @@ class ApiConstants{
   static const String popularUrl = "$baseUrl/movie/popular?api_key=$apiKey";
   static const String comingSoonUrl = "$baseUrl/movie/upcoming?api_key=$apiKey";
   static const String playingNowUrl = "$baseUrl/movie/now_playing?api_key=$apiKey";
+  static const String movieDetails = "$baseUrl/movie/";
 }

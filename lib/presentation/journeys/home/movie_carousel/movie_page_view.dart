@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/animated_movie_card_widget.dart';
-import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/movie_card_widget.dart';
 
 class MoviePageView extends StatefulWidget {
   final List<MovieEntity> movies;

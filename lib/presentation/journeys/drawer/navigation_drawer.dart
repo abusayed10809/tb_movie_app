@@ -5,7 +5,6 @@ import 'package:tb_movie_app/common/constants/image_assets.dart';
 import 'package:tb_movie_app/common/constants/languages.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
-import 'package:tb_movie_app/presentation/app_localizations.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';

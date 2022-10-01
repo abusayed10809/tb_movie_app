@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';
+import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
+import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
 
-class MovieCardWidget extends StatelessWidget{
+class MovieCardWidget extends StatelessWidget {
   final int movieId;
   final String posterPath;
   const MovieCardWidget({super.key, required this.movieId, required this.posterPath});
@@ -15,8 +17,16 @@ class MovieCardWidget extends StatelessWidget{
       elevation: 30,
       borderRadius: BorderRadius.circular(16.w),
       child: GestureDetector(
-        onTap: (){
-
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MovieDetailScreen(
+                movieDetailArguments: MovieDetailArguments(
+                  movieId,
+                ),
+              ),
+            ),
+          );
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.w),
@@ -28,5 +38,4 @@ class MovieCardWidget extends StatelessWidget{
       ),
     );
   }
-
 }

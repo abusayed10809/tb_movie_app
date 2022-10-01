@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
-import 'package:tb_movie_app/presentation/app_localizations.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 import 'package:tb_movie_app/presentation/theme/app_text.dart';
 
@@ -28,9 +26,7 @@ class MovieTabTitleWidget extends StatelessWidget {
         ),
         child: Text(
           title.langTranslate(context),
-          style: isSelected ?
-            Theme.of(context).textTheme.royalBlueSubtitle2
-          : Theme.of(context).textTheme.subtitle2,
+          style: isSelected ? Theme.of(context).textTheme.royalBlueSubtitle2 : Theme.of(context).textTheme.subtitle2,
         ),
       ),
     );

@@ -1,5 +1,3 @@
-
-import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/data/models/movie_model.dart';
 
 class MovieResultModel {
@@ -8,8 +6,7 @@ class MovieResultModel {
   int? totalPages;
   int? totalResults;
 
-  MovieResultModel(
-      {this.page, required this.movies, this.totalPages, this.totalResults});
+  MovieResultModel({this.page, required this.movies, this.totalPages, this.totalResults});
 
   MovieResultModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
@@ -34,8 +31,3 @@ class MovieResultModel {
     return data;
   }
 }
-
-
-
-
-
