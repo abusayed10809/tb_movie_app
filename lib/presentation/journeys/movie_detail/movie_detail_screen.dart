@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
+import 'package:tb_movie_app/common/constants/translation_constants.dart';
+import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
@@ -54,6 +57,23 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   children: [
                     BigPoster(
                       movie: movieDetail!,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.w,
+                      ),
+                      child: Text(
+                        movieDetail.overview!,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w,),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        TranslationConstants.cast.langTranslate(context),
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
                     ),
                   ],
                 );

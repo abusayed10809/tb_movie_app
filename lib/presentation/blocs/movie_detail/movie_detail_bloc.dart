@@ -8,14 +8,16 @@ import 'package:tb_movie_app/domain/entities/app_error.dart';
 import 'package:tb_movie_app/domain/entities/movie_detail_entity.dart';
 import 'package:tb_movie_app/domain/entities/movie_params.dart';
 import 'package:tb_movie_app/domain/usercases/get_movie_detail.dart';
+import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 
 part 'movie_detail_event.dart';
 part 'movie_detail_state.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail getMovieDetail;
+  final CastBloc castBloc;
 
-  MovieDetailBloc({required this.getMovieDetail}) : super(const MovieDetailState()) {
+  MovieDetailBloc({required this.castBloc, required this.getMovieDetail}) : super(const MovieDetailState()) {
     on<MovieDetailLoadEvent>(_onMovieDetailLoadEvent);
   }
 
