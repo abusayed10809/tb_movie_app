@@ -7,6 +7,8 @@ import 'package:tb_movie_app/data/models/cast_crew_model.dart';
 import 'package:tb_movie_app/data/models/movie_detail_model.dart';
 import 'package:tb_movie_app/data/models/movie_model.dart';
 import 'package:tb_movie_app/data/models/movies_result_model.dart';
+import 'package:tb_movie_app/data/models/video_model.dart';
+import 'package:tb_movie_app/data/models/video_result_model.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getTrending();
@@ -15,6 +17,7 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getComingSoon();
   Future<MovieDetailModel> getMovieDetail(int id);
   Future<List<CastModel>> getCastCrew(int id);
+  Future<List<VideoModel>> getVideos(int id);
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
@@ -107,6 +110,21 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
         throw Exception('cast crew is null');
       }
     } catch (error) {
+      throw Exception('model conversion failed');
+    }
+  }
+
+  @override
+  Future<List<VideoModel>> getVideos(int id) async{
+    try{
+      final response = await _client.get('${ApiConstants.movieDetails}$id/videos?api_key=${ApiConstants.apiKey}');
+      final List<VideoModel>? videos = VideoResultModel.fromJson(response).videos;
+      if(videos != null){
+        return videos;
+      }else {
+        throw Exception('video model is null');
+      }
+    } catch(error){
       throw Exception('model conversion failed');
     }
   }
