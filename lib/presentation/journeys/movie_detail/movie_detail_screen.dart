@@ -8,9 +8,11 @@ import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/videos/videos_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/big_poster.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/cast_widget.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
+import 'package:tb_movie_app/presentation/journeys/movie_detail/videos_widget.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   final MovieDetailArguments movieDetailArguments;
@@ -24,12 +26,14 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late MovieDetailBloc _movieDetailBloc;
   late CastBloc _castBloc;
+  late VideosBloc _videosBloc;
 
   @override
   void initState() {
     super.initState();
     _movieDetailBloc = getItInstance<MovieDetailBloc>();
     _castBloc = _movieDetailBloc.castBloc;
+    _videosBloc = _movieDetailBloc.videosBloc;
     _movieDetailBloc.add(
       MovieDetailLoadEvent(
         widget.movieDetailArguments.movieId,
@@ -41,6 +45,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   void dispose() {
     _movieDetailBloc.close();
     _castBloc.close();
+    _videosBloc.close();
     super.dispose();
   }
 
@@ -55,6 +60,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             ),
             BlocProvider<CastBloc>.value(
               value: _castBloc,
+            ),
+            BlocProvider<VideosBloc>.value(
+              value: _videosBloc,
             ),
           ],
           child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
@@ -92,6 +100,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                       ),
                       const CastWidget(),
+                      SizedBox(height: 10.h,),
+                      const VideosWidget(),
                     ],
                   );
                 case NetworkStatus.failure:

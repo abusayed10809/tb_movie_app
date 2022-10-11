@@ -1,3 +1,6 @@
+
+import 'package:flutter/material.dart';
+
 class ImageAssets {
   static const String svgDir = 'assets/svgs';
   static const String pngDir = 'assets/pngs';

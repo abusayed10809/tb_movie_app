@@ -6,14 +6,16 @@ import 'package:tb_movie_app/presentation/theme/app_color.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final double? width;
 
-  const CustomButton({Key? key, required this.text, required this.onPressed}) : super(key: key);
+  const CustomButton({Key? key, required this.text, required this.onPressed, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
       child: Container(
+        width: width,
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 7.h),
         decoration: BoxDecoration(
           gradient: const LinearGradient(

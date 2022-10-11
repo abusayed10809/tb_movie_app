@@ -1,10 +1,21 @@
 part of 'videos_bloc.dart';
 
-abstract class VideosState extends Equatable {
-  const VideosState();
-}
+class VideosState extends Equatable {
+  final NetworkStatus networkStatus;
+  final List<VideoEntity> videos;
+  const VideosState({
+    this.networkStatus = NetworkStatus.initial,
+    this.videos = const <VideoEntity>[],
+  });
 
-class VideosInitial extends VideosState {
+  VideosState copyWith({NetworkStatus? networkStatus, List<VideoEntity>? videos}){
+    return VideosState(
+      networkStatus: networkStatus ?? this.networkStatus,
+      videos: videos ?? this.videos,
+    );
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [networkStatus, videos];
+
 }

@@ -10,12 +10,14 @@ import 'package:tb_movie_app/domain/usercases/get_movie_detail.dart';
 import 'package:tb_movie_app/domain/usercases/get_playing_now.dart';
 import 'package:tb_movie_app/domain/usercases/get_popular.dart';
 import 'package:tb_movie_app/domain/usercases/get_trending.dart';
+import 'package:tb_movie_app/domain/usercases/get_videos.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/videos/videos_bloc.dart';
 
 final getItInstance = GetIt.I;
 
@@ -32,6 +34,7 @@ Future init() async {
   getItInstance.registerLazySingleton<GetComingSoon>(() => GetComingSoon(getItInstance()));
   getItInstance.registerLazySingleton<GetMovieDetail>(() => GetMovieDetail(getItInstance()));
   getItInstance.registerLazySingleton<GetMovieCastCrew>(() => GetMovieCastCrew(getItInstance()));
+  getItInstance.registerLazySingleton<GetVideos>(() => GetVideos(getItInstance()));
 
   getItInstance.registerFactory(() => MovieCarouselBloc(getTrending: getItInstance(), movieBackdropBloc: getItInstance()));
   getItInstance.registerFactory(() => MovieBackdropBloc());
@@ -42,8 +45,9 @@ Future init() async {
       getComingSoon: getItInstance(),
     ),
   );
-  getItInstance.registerFactory(() => MovieDetailBloc(getMovieDetail: getItInstance(), castBloc: getItInstance()));
+  getItInstance.registerFactory(() => MovieDetailBloc(getMovieDetail: getItInstance(), castBloc: getItInstance(), videosBloc: getItInstance()));
   getItInstance.registerFactory(() => CastBloc(getCast: getItInstance()));
+  getItInstance.registerFactory(() => VideosBloc(getVideos: getItInstance()));
 
   getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
 }

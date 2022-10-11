@@ -23,3 +23,20 @@ Widget emptyData({String? message}) {
     ),
   );
 }
+
+Widget failedData({String? message}) {
+  return Center(
+    child: Text(
+      message ?? 'Some error occurred, please try again.',
+      style: TextStyle(
+        fontSize: 15.sp,
+      ),
+    ),
+  );
+}
+
+Widget loadingData(){
+  return const Center(
+    child: CircularProgressIndicator(),
+  );
+}
