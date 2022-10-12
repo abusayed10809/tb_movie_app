@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
+import 'package:tb_movie_app/common/constants/size_config.dart';
+import 'package:tb_movie_app/common/extensions/num_extensions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
@@ -25,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+
     movieCarouselBloc = getItInstance<MovieCarouselBloc>();
     movieCarouselBloc.add(const MovieCarouselLoadEvent());
 
@@ -43,6 +47,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final mq = MediaQuery.of(context);
+    final width = mq.size.width;
+    final height = mq.size.height;
+    final fontSize = mq.textScaleFactor;
+    final appbarHeight = AppBar().preferredSize.height;
+    final safeAreaPadding = mq.padding.top;
+    SizeConfig().init(
+      widthI: width,
+      heightI: height,
+      fontSizeI: fontSize,
+      appbarHeightI: appbarHeight,
+      safeAreaPaddingI: safeAreaPadding,
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
