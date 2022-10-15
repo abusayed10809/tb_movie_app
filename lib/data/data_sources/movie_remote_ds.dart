@@ -18,6 +18,7 @@ abstract class MovieRemoteDataSource {
   Future<MovieDetailModel> getMovieDetail(int id);
   Future<List<CastModel>> getCastCrew(int id);
   Future<List<VideoModel>> getVideos(int id);
+  Future<List<MovieModel>> getSearchedMovies(String searchTerm);
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
@@ -123,6 +124,28 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
         return videos;
       }else {
         throw Exception('video model is null');
+      }
+    } catch(error){
+      throw Exception('model conversion failed');
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getSearchedMovies(String searchTerm) async {
+    try{
+      final response = await _client.get(
+        ApiConstants.searchMovies,
+        params: {
+          'query': searchTerm,
+        },
+      );
+
+      final List<MovieModel>? movies = MovieResultModel.fromJson(response).movies;
+
+      if(movies != null){
+        return movies;
+      }else {
+        throw Exception('movie model is null');
       }
     } catch(error){
       throw Exception('model conversion failed');

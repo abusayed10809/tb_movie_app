@@ -62,4 +62,8 @@ extension ThemeTextExtension on TextTheme {
     color: AppColor.vulcanColor,
     fontWeight: FontWeight.bold,
   );
+
+  TextStyle get greyCaption => caption!.copyWith(
+    color: Colors.grey,
+  );
 }

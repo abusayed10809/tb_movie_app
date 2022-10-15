@@ -8,8 +8,9 @@ class ApiClient {
 
   ApiClient(this._client);
 
-  dynamic get(String path) async {
+  dynamic get(String path, {Map<dynamic, dynamic>? params}) async {
     try {
+      String pathWithParams = getPath(path, params);
       Uri uri = Uri.parse(path);
 
       Map<String, String> headers = {
@@ -27,5 +28,15 @@ class ApiClient {
     } catch (error) {
       throw Exception("api connection failed");
     }
+  }
+
+  String getPath(String path, Map<dynamic, dynamic>? params) {
+    var paramsString = '';
+    if(params?.isNotEmpty ?? false){
+      params!.forEach((key, value) {
+        paramsString += "&$key=$value";
+      });
+    }
+    return path+paramsString;
   }
 }

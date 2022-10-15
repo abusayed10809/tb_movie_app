@@ -7,6 +7,7 @@ import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/search_movie/search_movie_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 import 'package:tb_movie_app/presentation/journeys/home/movie_tab/movie_tab_widget.dart';
@@ -23,18 +24,16 @@ class _HomeScreenState extends State<HomeScreen> {
   late MovieCarouselBloc movieCarouselBloc;
   late MovieBackdropBloc movieBackdropBloc;
   late MovieTabBloc movieTabBloc;
+  late SearchMovieBloc searchMovieBloc;
 
   @override
   void initState() {
     super.initState();
-
-
     movieCarouselBloc = getItInstance<MovieCarouselBloc>();
     movieCarouselBloc.add(const MovieCarouselLoadEvent());
-
     movieTabBloc = getItInstance<MovieTabBloc>();
-
     movieBackdropBloc = movieCarouselBloc.movieBackdropBloc;
+    searchMovieBloc = getItInstance<SearchMovieBloc>();
   }
 
   @override
@@ -43,11 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
     movieCarouselBloc.close();
     movieBackdropBloc.close();
     movieTabBloc.close();
+    searchMovieBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-
     final mq = MediaQuery.of(context);
     final width = mq.size.width;
     final height = mq.size.height;
@@ -72,6 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider(
           create: (context) => movieTabBloc,
+        ),
+        BlocProvider(
+          create: (context) => searchMovieBloc,
         ),
       ],
       child: Scaffold(

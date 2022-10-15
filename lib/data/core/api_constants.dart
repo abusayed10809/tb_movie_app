@@ -10,4 +10,5 @@ class ApiConstants {
   static const String comingSoonUrl = "$baseUrl/movie/upcoming?api_key=$apiKey";
   static const String playingNowUrl = "$baseUrl/movie/now_playing?api_key=$apiKey";
   static const String movieDetails = "$baseUrl/movie/";
+  static const String searchMovies = "$baseUrl/search/movie?api_key=$apiKey";
 }

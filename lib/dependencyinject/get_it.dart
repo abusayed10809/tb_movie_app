@@ -11,23 +11,28 @@ import 'package:tb_movie_app/domain/usercases/get_playing_now.dart';
 import 'package:tb_movie_app/domain/usercases/get_popular.dart';
 import 'package:tb_movie_app/domain/usercases/get_trending.dart';
 import 'package:tb_movie_app/domain/usercases/get_videos.dart';
+import 'package:tb_movie_app/domain/usercases/search_movies.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/search_movie/search_movie_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/videos/videos_bloc.dart';
 
 final getItInstance = GetIt.I;
 
 Future init() async {
+  /// api clients
   getItInstance.registerLazySingleton<Client>(() => Client());
   getItInstance.registerLazySingleton<ApiClient>(() => ApiClient(getItInstance()));
 
+  /// remote data sources
   getItInstance.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(getItInstance()));
   getItInstance.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(getItInstance()));
 
+  /// use cases
   getItInstance.registerLazySingleton<GetTrending>(() => GetTrending(getItInstance()));
   getItInstance.registerLazySingleton<GetPopular>(() => GetPopular(getItInstance()));
   getItInstance.registerLazySingleton<GetPlayingNow>(() => GetPlayingNow(getItInstance()));
@@ -35,19 +40,16 @@ Future init() async {
   getItInstance.registerLazySingleton<GetMovieDetail>(() => GetMovieDetail(getItInstance()));
   getItInstance.registerLazySingleton<GetMovieCastCrew>(() => GetMovieCastCrew(getItInstance()));
   getItInstance.registerLazySingleton<GetVideos>(() => GetVideos(getItInstance()));
+  getItInstance.registerLazySingleton<SearchMovies>(() => SearchMovies(getItInstance()));
 
+  /// blocs
   getItInstance.registerFactory(() => MovieCarouselBloc(getTrending: getItInstance(), movieBackdropBloc: getItInstance()));
   getItInstance.registerFactory(() => MovieBackdropBloc());
-  getItInstance.registerFactory(
-    () => MovieTabBloc(
-      getPopular: getItInstance(),
-      getPlayingNow: getItInstance(),
-      getComingSoon: getItInstance(),
-    ),
-  );
+  getItInstance.registerFactory(() => MovieTabBloc(getPopular: getItInstance(), getPlayingNow: getItInstance(), getComingSoon: getItInstance()));
   getItInstance.registerFactory(() => MovieDetailBloc(getMovieDetail: getItInstance(), castBloc: getItInstance(), videosBloc: getItInstance()));
   getItInstance.registerFactory(() => CastBloc(getCast: getItInstance()));
   getItInstance.registerFactory(() => VideosBloc(getVideos: getItInstance()));
+  getItInstance.registerFactory(() => SearchMovieBloc(searchMovies: getItInstance()));
 
   getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
 }
