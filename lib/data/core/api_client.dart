@@ -11,12 +11,18 @@ class ApiClient {
   dynamic get(String path, {Map<dynamic, dynamic>? params}) async {
     try {
       String pathWithParams = getPath(path, params);
-      Uri uri = Uri.parse(path);
+      Uri uri = Uri.parse(pathWithParams);
 
       Map<String, String> headers = {
         'Content-Type': 'application/json',
       };
+
+      logMessage('uri: ${uri}');
+
       final response = await _client.get(uri, headers: headers);
+
+      logMessage('response -> ${response.body}');
+      logMessage('status code -> ${response.statusCode}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(utf8.decode(response.bodyBytes));

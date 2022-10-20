@@ -4,6 +4,7 @@ import 'package:tb_movie_app/domain/entities/app_error.dart';
 import 'package:tb_movie_app/domain/entities/cast_entity.dart';
 import 'package:tb_movie_app/domain/entities/movie_detail_entity.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
+import 'package:tb_movie_app/domain/entities/no_params.dart';
 import 'package:tb_movie_app/domain/entities/video_entity.dart';
 
 abstract class MovieRepository {
@@ -15,4 +16,10 @@ abstract class MovieRepository {
   Future<Either<AppError, List<CastEntity>>> getMovieCastCrew(int id);
   Future<Either<AppError, List<VideoEntity>>> getVideos(int id);
   Future<Either<AppError, List<MovieEntity>>> getSearchedMovies(String searchTerm);
+
+  /// local favourite
+  Future<Either<AppError, void>> saveMovie(MovieEntity movieEntity);
+  Future<Either<AppError, List<MovieEntity>>> getFavouriteMovies(NoParams noParams);
+  Future<Either<AppError, void>> deleteFavouriteMovies(int movieId);
+  Future<Either<AppError, bool>> checkIfMovieFavourite(int movieId);
 }

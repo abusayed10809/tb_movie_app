@@ -95,7 +95,7 @@ class CustomSearchDelegate extends SearchDelegate {
             );
           case NetworkStatus.failure:
             return AppErrorWidget(
-              appErrorType: AppErrorType.api,
+              appErrorType: state.appErrorType!,
               onPressed: () {
                 searchMovieBloc.add(SearchTermChangedEvent(query));
               },

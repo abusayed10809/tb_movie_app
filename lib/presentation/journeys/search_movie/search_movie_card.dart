@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/extensions/num_extensions.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
+import 'package:tb_movie_app/presentation/theme/app_text.dart';
 
 class SearchMovieCard extends StatelessWidget {
   final MovieEntity movie;
@@ -43,6 +45,7 @@ class SearchMovieCard extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(width: 10.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +60,8 @@ class SearchMovieCard extends StatelessWidget {
                     movie.overview!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.greyCaption,
+                    // style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
               ),

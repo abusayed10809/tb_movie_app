@@ -25,7 +25,7 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
       final Either<AppError, List<MovieEntity>> response = await searchMovies(MovieSearchParams(searchTerm: event.searchTerm));
       response.fold(
         (l) {
-          emit(state.copyWith(networkStatus: NetworkStatus.failure, movies: <MovieEntity>[]));
+          emit(state.copyWith(networkStatus: NetworkStatus.failure, movies: <MovieEntity>[], appErrorType: l.appErrorType));
         },
         (r) {
           emit(state.copyWith(networkStatus: NetworkStatus.success, movies: r));

@@ -38,6 +38,9 @@ dependencies:
   cached_network_image: ^3.2.1
   wiredash: ^1.5.0
   youtube_player_flutter: ^8.1.1
+  hive: ^2.2.3
+  path_provider: ^2.0.11
+
   flutter_localizations:
     sdk: flutter
 
@@ -50,6 +53,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  hive_generator: ^2.0.0
+  build_runner: ^2.3.2
   flutter_test:
     sdk: flutter
 

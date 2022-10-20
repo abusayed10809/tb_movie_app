@@ -35,12 +35,21 @@ class AppText {
         color: AppColor.whiteColor,
       );
 
+  static TextStyle get _whiteCaption => _poppinsTextTheme.caption!.copyWith(
+    fontSize: 14.sp,
+    color: AppColor.whiteColor,
+    wordSpacing: 0.25,
+    letterSpacing: 0.25,
+    height: 1.5,
+  );
+
   static getTextTheme() => TextTheme(
         headline6: _whiteHeadline6,
         subtitle1: _whiteSubtitle1,
         subtitle2: _whiteSubtitle2,
         bodyText2: _whiteBodyText2,
         button: _whiteButton,
+        caption: _whiteCaption,
       );
 }
 
