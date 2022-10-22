@@ -8,6 +8,7 @@ import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';
+import 'package:tb_movie_app/presentation/journeys/favourite/favourite_screen.dart';
 import 'package:tb_movie_app/presentation/widget/app_dialog.dart';
 import 'package:tb_movie_app/presentation/widget/logo.dart';
 import 'package:wiredash/wiredash.dart';
@@ -43,7 +44,11 @@ class NavigationDrawer extends StatelessWidget {
             ),
             NavigationListItem(
               title: TranslationConstants.favouriteMovies.langTranslate(context),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => FavouriteScreen()),
+                );
+              },
             ),
             NavigationExpandedListItem(
               title: TranslationConstants.language.langTranslate(context),

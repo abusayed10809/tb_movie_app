@@ -7,6 +7,7 @@ import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/favourite/favourite_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/videos/videos_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/big_poster.dart';
@@ -27,6 +28,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late MovieDetailBloc _movieDetailBloc;
   late CastBloc _castBloc;
   late VideosBloc _videosBloc;
+  late FavouriteBloc _favouriteBloc;
 
   @override
   void initState() {
@@ -34,6 +36,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     _movieDetailBloc = getItInstance<MovieDetailBloc>();
     _castBloc = _movieDetailBloc.castBloc;
     _videosBloc = _movieDetailBloc.videosBloc;
+    _favouriteBloc = _movieDetailBloc.favouriteBloc;
     _movieDetailBloc.add(
       MovieDetailLoadEvent(
         widget.movieDetailArguments.movieId,
@@ -46,6 +49,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     _movieDetailBloc.close();
     _castBloc.close();
     _videosBloc.close();
+    _favouriteBloc.close();
     super.dispose();
   }
 
@@ -63,6 +67,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             ),
             BlocProvider<VideosBloc>.value(
               value: _videosBloc,
+            ),
+            BlocProvider<FavouriteBloc>.value(
+              value: _favouriteBloc,
             ),
           ],
           child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
