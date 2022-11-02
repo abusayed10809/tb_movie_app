@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
+import 'package:tb_movie_app/common/constants/route_constants.dart';
 import 'package:tb_movie_app/common/constants/size_config.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
@@ -29,12 +30,9 @@ class VideosWidget extends StatelessWidget {
               text: TranslationConstants.watchTrailers,
               width: SizeConfig.width * 0.95,
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => WatchVideoScreen(
-                      watchVideoArguments: WatchVideoArguments(state.videos),
-                    ),
-                  ),
+                Navigator.of(context).pushNamed(
+                  RouteList.watchTrailer,
+                  arguments: WatchVideoArguments(state.videos),
                 );
               },
             );
