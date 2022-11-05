@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:tb_movie_app/data/core/unauthorized_exception.dart';
+import 'package:tb_movie_app/data/data_sources/authentication_local_data_source.dart';
 import 'package:tb_movie_app/data/data_sources/authentication_remote_data_source.dart';
 import 'package:tb_movie_app/data/models/request_token_model.dart';
 import 'package:tb_movie_app/domain/entities/app_error.dart';
@@ -12,9 +13,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final AuthenticationLocalDataSource _authenticationLocalDataSource;
 
   AuthenticationRepositoryImpl(
-      this._authenticationRemoteDataSource,
-      this._authenticationLocalDataSource,
-      );
+    this._authenticationRemoteDataSource,
+    this._authenticationLocalDataSource,
+  );
 
   Future<Either<AppError, RequestTokenModel>> _getRequestToken() async {
     try {
@@ -29,25 +30,23 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   @override
   Future<Either<AppError, bool>> loginUser(Map<String, dynamic> body) async {
-    final requestTokenEitherResponse = await _getRequestToken();
-    final token1 =
-        requestTokenEitherResponse.getOrElse(() => null)?.requestToken ?? '';
+    final Either<AppError, RequestTokenModel> requestTokenEitherResponse = await _getRequestToken();
+    late String token1;
+    requestTokenEitherResponse.fold((l) => token1 = '', (r) => token1 = r.requestToken!);
 
     try {
       body.putIfAbsent('request_token', () => token1);
-      final validateWithLoginToken =
-      await _authenticationRemoteDataSource.validateWithLogin(body);
-      final sessionId = await _authenticationRemoteDataSource
-          .createSession(validateWithLoginToken.toJson());
+      final validateWithLoginToken = await _authenticationRemoteDataSource.validateWithLogin(body);
+      final String? sessionId = await _authenticationRemoteDataSource.createSession(validateWithLoginToken.toJson());
       if (sessionId != null) {
         await _authenticationLocalDataSource.saveSessionId(sessionId);
         return const Right(true);
       }
-      return Left(AppError(AppErrorType.sessionDenied));
+      return const Left(AppError(AppErrorType.sessionDenied));
     } on SocketException {
       return const Left(AppError(AppErrorType.network));
     } on UnauthorizedException {
-      return Left(AppError(AppErrorType.unauthorised));
+      return const Left(AppError(AppErrorType.unauthorized));
     } on Exception {
       return const Left(AppError(AppErrorType.api));
     }
@@ -55,12 +54,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   @override
   Future<Either<AppError, void>> logoutUser() async {
-    final sessionId = await _authenticationLocalDataSource.getSessionId();
-    await Future.wait([
-      _authenticationRemoteDataSource.deleteSession(sessionId),
-      _authenticationLocalDataSource.deleteSessionId(),
-    ]);
-    print(await _authenticationLocalDataSource.getSessionId());
+    // final sessionId = await _authenticationLocalDataSource.getSessionId();
+    // await Future.wait([
+    //   _authenticationRemoteDataSource.deleteSession(sessionId),
+    //   _authenticationLocalDataSource.deleteSessionId(),
+    // ]);
+    // print(await _authenticationLocalDataSource.getSessionId());
     return const Right(Unit);
   }
 }

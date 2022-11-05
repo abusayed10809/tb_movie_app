@@ -5,7 +5,7 @@ import 'package:tb_movie_app/data/models/request_token_model.dart';
 abstract class AuthenticationRemoteDataSource {
   Future<RequestTokenModel> getRequestToken();
   Future<RequestTokenModel> validateWithLogin(Map<String, dynamic> requestBody);
-  Future<String> createSession(Map<String, dynamic> requestBody);
+  Future<String?> createSession(Map<String, dynamic> requestBody);
   Future<bool> deleteSession(String sessionId);
 }
 
@@ -41,7 +41,7 @@ class AuthenticationRemoteDataSourceImpl
   }
 
   @override
-  Future<String> createSession(Map<String, dynamic> requestBody) async {
+  Future<String?> createSession(Map<String, dynamic> requestBody) async {
     try{
       final response = await _client.post(
         ApiConstants.createNewSessionUrl,
