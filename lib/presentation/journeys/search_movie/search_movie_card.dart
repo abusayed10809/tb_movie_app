@@ -6,7 +6,6 @@ import 'package:tb_movie_app/common/extensions/num_extensions.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';
 import 'package:tb_movie_app/domain/entities/movie_entity.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
-import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
 import 'package:tb_movie_app/presentation/theme/app_text.dart';
 
 class SearchMovieCard extends StatelessWidget {

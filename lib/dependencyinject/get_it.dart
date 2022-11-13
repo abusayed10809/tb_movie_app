@@ -24,6 +24,7 @@ import 'package:tb_movie_app/domain/usercases/get_preferred_language.dart';
 import 'package:tb_movie_app/domain/usercases/get_trending.dart';
 import 'package:tb_movie_app/domain/usercases/get_videos.dart';
 import 'package:tb_movie_app/domain/usercases/login_user.dart';
+import 'package:tb_movie_app/domain/usercases/logout_user.dart';
 import 'package:tb_movie_app/domain/usercases/save_movie.dart';
 import 'package:tb_movie_app/domain/usercases/search_movies.dart';
 import 'package:tb_movie_app/domain/usercases/update_language.dart';
@@ -73,6 +74,7 @@ Future init() async {
   getItInstance.registerLazySingleton<UpdateLanguage>(() => UpdateLanguage(getItInstance()));
   getItInstance.registerLazySingleton<GetPreferredLanguage>(() => GetPreferredLanguage(getItInstance()));
   getItInstance.registerLazySingleton<LoginUser>(() => LoginUser(getItInstance()));
+  getItInstance.registerLazySingleton<LogoutUser>(() => LogoutUser(getItInstance()));
 
   /// blocs
   getItInstance.registerFactory(() => MovieCarouselBloc(getTrending: getItInstance(), movieBackdropBloc: getItInstance()));
@@ -83,7 +85,7 @@ Future init() async {
   getItInstance.registerFactory(() => VideosBloc(getVideos: getItInstance()));
   getItInstance.registerFactory(() => SearchMovieBloc(searchMovies: getItInstance()));
   getItInstance.registerFactory(() => FavouriteBloc(saveMovie: getItInstance(), getFavouriteMovies: getItInstance(), deleteFavouriteMovie: getItInstance(), checkIfMovieFavourite: getItInstance(), ));
-  getItInstance.registerFactory(() => LoginBloc(loginUser: getItInstance()));
+  getItInstance.registerFactory(() => LoginBloc(loginUser: getItInstance(), logoutUser: getItInstance()));
 
   getItInstance.registerSingleton<LanguageBloc>(LanguageBloc(getPreferredLanguage: getItInstance(), updateLanguage: getItInstance()));
 }

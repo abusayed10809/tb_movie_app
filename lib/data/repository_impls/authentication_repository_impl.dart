@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/data/core/unauthorized_exception.dart';
 import 'package:tb_movie_app/data/data_sources/authentication_local_data_source.dart';
 import 'package:tb_movie_app/data/data_sources/authentication_remote_data_source.dart';
@@ -29,14 +30,15 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<Either<AppError, bool>> loginUser(Map<String, dynamic> body) async {
+  Future<Either<AppError, bool>> loginUser(Map<String, dynamic> params) async {
     final Either<AppError, RequestTokenModel> requestTokenEitherResponse = await _getRequestToken();
     late String token1;
     requestTokenEitherResponse.fold((l) => token1 = '', (r) => token1 = r.requestToken!);
-
+    logMessage('token value: $token1');
     try {
-      body.putIfAbsent('request_token', () => token1);
-      final validateWithLoginToken = await _authenticationRemoteDataSource.validateWithLogin(body);
+      params.putIfAbsent('request_token', () => token1);
+      logMessage('request body: $params');
+      final validateWithLoginToken = await _authenticationRemoteDataSource.validateWithLogin(params);
       final String? sessionId = await _authenticationRemoteDataSource.createSession(validateWithLoginToken.toJson());
       if (sessionId != null) {
         await _authenticationLocalDataSource.saveSessionId(sessionId);
@@ -54,12 +56,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   @override
   Future<Either<AppError, void>> logoutUser() async {
-    // final sessionId = await _authenticationLocalDataSource.getSessionId();
-    // await Future.wait([
-    //   _authenticationRemoteDataSource.deleteSession(sessionId),
-    //   _authenticationLocalDataSource.deleteSessionId(),
-    // ]);
-    // print(await _authenticationLocalDataSource.getSessionId());
+    final sessionId = await _authenticationLocalDataSource.getSessionId();
+    await Future.wait([
+      _authenticationRemoteDataSource.deleteSession(sessionId),
+      _authenticationLocalDataSource.deleteSessionId(),
+    ]);
+    print(await _authenticationLocalDataSource.getSessionId());
     return const Right(Unit);
   }
 }

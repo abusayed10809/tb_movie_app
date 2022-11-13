@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/common/constants/image_assets.dart';
 import 'package:tb_movie_app/common/constants/languages.dart';
 import 'package:tb_movie_app/common/constants/route_constants.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/login/login_bloc.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';
-import 'package:tb_movie_app/presentation/journeys/favourite/favourite_screen.dart';
 import 'package:tb_movie_app/presentation/widget/app_dialog.dart';
 import 'package:tb_movie_app/presentation/widget/logo.dart';
 import 'package:wiredash/wiredash.dart';
@@ -24,7 +25,10 @@ class NavigationDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.7),
+            color: Theme
+                .of(context)
+                .primaryColor
+                .withOpacity(0.7),
             blurRadius: 4,
           ),
         ],
@@ -73,6 +77,18 @@ class NavigationDrawer extends StatelessWidget {
                 Navigator.of(context).pop();
                 _showAboutDialog(context);
               },
+            ),
+            BlocListener<LoginBloc, LoginState>(
+              listenWhen: (previous, current) => current.logoutNetworkStatus == NetworkStatus.success,
+              listener: (context, state) {
+                Navigator.of(context).pushNamedAndRemoveUntil(RouteList.initial, (route) => false);
+              },
+              child: NavigationListItem(
+                title: TranslationConstants.logout.langTranslate(context),
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                },
+              ),
             ),
           ],
         ),

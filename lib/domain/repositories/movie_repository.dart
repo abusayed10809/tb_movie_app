@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:tb_movie_app/data/models/video_model.dart';
 import 'package:tb_movie_app/domain/entities/app_error.dart';
 import 'package:tb_movie_app/domain/entities/cast_entity.dart';
 import 'package:tb_movie_app/domain/entities/movie_detail_entity.dart';

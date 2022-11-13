@@ -19,7 +19,8 @@ class ApiClient {
       };
 
       final response = await _client.get(uri, headers: headers);
-
+      logMessage('api response');
+      logMessage(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -43,7 +44,7 @@ class ApiClient {
           'Content-Type': 'application/json',
         },
       );
-
+      logMessage('post response: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
         return responseBody;

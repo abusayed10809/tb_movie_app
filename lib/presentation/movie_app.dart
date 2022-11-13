@@ -4,11 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/languages.dart';
 import 'package:tb_movie_app/common/constants/route_constants.dart';
-import 'package:tb_movie_app/common/constants/size_config.dart';
-import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/app_localizations.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/login/login_bloc.dart';
 import 'package:tb_movie_app/presentation/fade_page_route_builder.dart';
 import 'package:tb_movie_app/presentation/journeys/home/home_screen.dart';
 import 'package:tb_movie_app/presentation/routes.dart';
@@ -25,17 +24,20 @@ class MovieApp extends StatefulWidget {
 
 class _MovieAppState extends State<MovieApp> {
   late LanguageBloc _languageBloc;
+  late LoginBloc _loginBloc;
 
   @override
   initState() {
     super.initState();
     _languageBloc = getItInstance<LanguageBloc>();
     _languageBloc.add(LoadPreferredLanguageEvent());
+    _loginBloc = getItInstance<LoginBloc>();
   }
 
   @override
   dispose() {
     _languageBloc.close();
+    _loginBloc.close();
     super.dispose();
   }
 
@@ -46,8 +48,15 @@ class _MovieAppState extends State<MovieApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider<LanguageBloc>.value(
-          value: _languageBloc,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<LanguageBloc>.value(
+              value: _languageBloc,
+            ),
+            BlocProvider<LoginBloc>.value(
+              value: _loginBloc,
+            ),
+          ],
           child: BlocBuilder<LanguageBloc, LanguageState>(
             builder: (context, state) {
               return WiredashApp(
@@ -79,7 +88,7 @@ class _MovieAppState extends State<MovieApp> {
                     GlobalCupertinoLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                   ],
-                  builder: (context, child){
+                  builder: (context, child) {
                     return child!;
                   },
                   // onGenerateRoute: ,

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 
 class SizeConfig{
   static late double width;

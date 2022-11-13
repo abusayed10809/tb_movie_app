@@ -12,8 +12,8 @@ class ApiConstants {
   static const String movieDetails = "$baseUrl/movie/";
   static const String searchMovies = "$baseUrl/search/movie?api_key=$apiKey";
 
-  static const String getRequestTokenUrl = '$baseUrl/authentication/token/new';
-  static const String validateRequestTokenUrl = '$baseUrl/authentication/token/validate_with_login';
-  static const String createNewSessionUrl = '$baseUrl/authentication/session/new';
-  static const String deleteSessionUrl = '$baseUrl/authentication/session';
+  static const String getRequestTokenUrl = '$baseUrl/authentication/token/new?api_key=$apiKey';
+  static const String validateRequestTokenUrl = '$baseUrl/authentication/token/validate_with_login?api_key=$apiKey';
+  static const String createNewSessionUrl = '$baseUrl/authentication/session/new?api_key=$apiKey';
+  static const String deleteSessionUrl = '$baseUrl/authentication/session?api_key=$apiKey';
 }
