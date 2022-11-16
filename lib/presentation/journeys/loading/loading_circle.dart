@@ -14,7 +14,7 @@ class LoadingCircle extends StatelessWidget {
       height: size,
       child: const FlareActor(
         'assets/animations/loading_circle.flr',
-        animation: 'loading',
+        animation: 'load',
         snapToEnd: true,
       ),
     );
