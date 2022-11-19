@@ -10,7 +10,7 @@ import 'package:tb_movie_app/presentation/journeys/watch_video/watch_video_scree
 
 class Routes {
   static Map<String, WidgetBuilder> getRoutes(RouteSettings setting) => {
-    RouteList.initial: (context) => const LoadingScreen(),
+    RouteList.initial: (context) => const HomeScreen(),
     RouteList.movieDetail: (context) => MovieDetailScreen(
       movieDetailArguments: setting.arguments as MovieDetailArguments,
     ),

@@ -23,7 +23,7 @@ class ApiClient {
 
       logMessage('response -> ${response.body}');
       logMessage('status code -> ${response.statusCode}');
-
+      await Future.delayed(const Duration(milliseconds: 2000));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 

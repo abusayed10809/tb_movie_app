@@ -25,6 +25,7 @@ import 'package:tb_movie_app/domain/usercases/update_language.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/favourite/favourite_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
@@ -65,14 +66,15 @@ Future init() async {
   getItInstance.registerLazySingleton<GetPreferredLanguage>(() => GetPreferredLanguage(getItInstance()));
 
   /// blocs
-  getItInstance.registerFactory(() => MovieCarouselBloc(getTrending: getItInstance(), movieBackdropBloc: getItInstance()));
+  getItInstance.registerFactory(() => MovieCarouselBloc(getTrending: getItInstance(), movieBackdropBloc: getItInstance(), loadingBloc: getItInstance(),));
   getItInstance.registerFactory(() => MovieBackdropBloc());
   getItInstance.registerFactory(() => MovieTabBloc(getPopular: getItInstance(), getPlayingNow: getItInstance(), getComingSoon: getItInstance()));
-  getItInstance.registerFactory(() => MovieDetailBloc(getMovieDetail: getItInstance(), castBloc: getItInstance(), videosBloc: getItInstance(), favouriteBloc: getItInstance()));
+  getItInstance.registerFactory(() => MovieDetailBloc(getMovieDetail: getItInstance(), castBloc: getItInstance(), videosBloc: getItInstance(), favouriteBloc: getItInstance(), loadingBloc: getItInstance(),));
   getItInstance.registerFactory(() => CastBloc(getCast: getItInstance()));
   getItInstance.registerFactory(() => VideosBloc(getVideos: getItInstance()));
-  getItInstance.registerFactory(() => SearchMovieBloc(searchMovies: getItInstance()));
+  getItInstance.registerFactory(() => SearchMovieBloc(searchMovies: getItInstance(), loadingBloc: getItInstance(),));
   getItInstance.registerFactory(() => FavouriteBloc(saveMovie: getItInstance(), getFavouriteMovies: getItInstance(), deleteFavouriteMovie: getItInstance(), checkIfMovieFavourite: getItInstance(), ));
 
   getItInstance.registerSingleton<LanguageBloc>(LanguageBloc(getPreferredLanguage: getItInstance(), updateLanguage: getItInstance()));
+  getItInstance.registerSingleton<LoadingBloc>(LoadingBloc());
 }

@@ -9,8 +9,10 @@ import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/app_localizations.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
+import 'package:tb_movie_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:tb_movie_app/presentation/fade_page_route_builder.dart';
 import 'package:tb_movie_app/presentation/journeys/home/home_screen.dart';
+import 'package:tb_movie_app/presentation/journeys/loading/loading_screen.dart';
 import 'package:tb_movie_app/presentation/routes.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
 import 'package:tb_movie_app/presentation/theme/app_text.dart';
@@ -25,17 +27,20 @@ class MovieApp extends StatefulWidget {
 
 class _MovieAppState extends State<MovieApp> {
   late LanguageBloc _languageBloc;
+  late LoadingBloc _loadingBloc;
 
   @override
   initState() {
     super.initState();
     _languageBloc = getItInstance<LanguageBloc>();
     _languageBloc.add(LoadPreferredLanguageEvent());
+    _loadingBloc = getItInstance<LoadingBloc>();
   }
 
   @override
   dispose() {
     _languageBloc.close();
+    _loadingBloc.close();
     super.dispose();
   }
 
@@ -46,8 +51,15 @@ class _MovieAppState extends State<MovieApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider<LanguageBloc>.value(
-          value: _languageBloc,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<LanguageBloc>.value(
+              value: _languageBloc,
+            ),
+            BlocProvider<LoadingBloc>.value(
+              value: _loadingBloc,
+            ),
+          ],
           child: BlocBuilder<LanguageBloc, LanguageState>(
             builder: (context, state) {
               return WiredashApp(
@@ -79,10 +91,11 @@ class _MovieAppState extends State<MovieApp> {
                     GlobalCupertinoLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                   ],
-                  builder: (context, child){
-                    return child!;
+                  builder: (context, child) {
+                    return LoadingScreen(
+                      screen: child!,
+                    );
                   },
-                  // onGenerateRoute: ,
                   initialRoute: RouteList.initial,
                   onGenerateRoute: (RouteSettings settings) {
                     final routes = Routes.getRoutes(settings);
