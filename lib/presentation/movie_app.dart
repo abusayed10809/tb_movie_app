@@ -70,7 +70,7 @@ class _MovieAppState extends State<MovieApp> {
             ),
           ],
           child: BlocBuilder<ThemeCubit, Themes>(
-            builder: (context, state) {
+            builder: (context, themeState) {
               return BlocBuilder<LanguageBloc, LanguageState>(
                 builder: (context, state) {
                   return WiredashApp(
@@ -79,12 +79,29 @@ class _MovieAppState extends State<MovieApp> {
                       debugShowCheckedModeBanner: false,
                       title: 'Movie App',
                       theme: ThemeData(
+                        brightness: themeState == Themes.dark ? Brightness.dark : Brightness.light,
+                        textTheme: themeState == Themes.dark ? AppText.getTextTheme() : AppText.getLightTextTheme(),
                         unselectedWidgetColor: AppColor.royalBlueColor,
-                        primaryColor: AppColor.vulcanColor,
-                        accentColor: AppColor.royalBlueColor,
-                        scaffoldBackgroundColor: AppColor.vulcanColor,
+                        primaryColor: themeState == Themes.dark ? AppColor.vulcanColor : Colors.white,
+                        accentColor: themeState == Themes.dark ? AppColor.royalBlueColor : Colors.white,
+                        scaffoldBackgroundColor: themeState == Themes.dark ? AppColor.vulcanColor : Colors.white,
+                        cardTheme: CardTheme(
+                          color: themeState == Themes.dark ? Colors.white : AppColor.vulcanColor,
+                        ),
+                        inputDecorationTheme: InputDecorationTheme(
+                          hintStyle: Theme.of(context).textTheme.greySubtitle1,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: themeState == Themes.dark ? Colors.white : AppColor.vulcanColor,
+                            ),
+                          ),
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
                         visualDensity: VisualDensity.adaptivePlatformDensity,
-                        textTheme: AppText.getTextTheme(),
                         appBarTheme: const AppBarTheme(
                           elevation: 0,
                           color: AppColor.vulcanColor,
@@ -93,7 +110,7 @@ class _MovieAppState extends State<MovieApp> {
                       supportedLocales: Languages.languages
                           .map(
                             (e) => Locale(e.code),
-                      )
+                          )
                           .toList(),
                       locale: state.locale,
                       localizationsDelegates: const [
