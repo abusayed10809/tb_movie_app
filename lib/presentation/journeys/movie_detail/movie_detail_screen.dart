@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/common/constants/translation_constants.dart';
 import 'package:tb_movie_app/common/extensions/string_extension.dart';
-import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/favourite/favourite_bloc.dart';

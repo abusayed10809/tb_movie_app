@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/route_constants.dart';
 import 'package:tb_movie_app/data/core/api_constants.dart';
 import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
-import 'package:tb_movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final int movieId;

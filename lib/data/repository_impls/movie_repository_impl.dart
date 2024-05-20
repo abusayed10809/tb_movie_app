@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/data/data_sources/movie_local_data_source.dart';
 import 'package:tb_movie_app/data/data_sources/movie_remote_ds.dart';
 import 'package:tb_movie_app/data/models/movie_model.dart';

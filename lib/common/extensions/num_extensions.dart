@@ -6,18 +6,18 @@ extension NumExtension on num {
   }
 
   double width() {
-    return (this * SizeConfig.width);
+    return this * SizeConfig.width;
   }
 
   double height() {
-    return (this * SizeConfig.height);
+    return this * SizeConfig.height;
   }
 
   double fontSize(){
-    return (this * SizeConfig.fontSize);
+    return this * SizeConfig.fontSize;
   }
 
   double heightFull(){
-    return (this * SizeConfig.heightFull);
+    return this * SizeConfig.heightFull;
   }
 }

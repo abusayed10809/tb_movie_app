@@ -13,6 +13,9 @@ import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_li
 import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:tb_movie_app/presentation/journeys/favourite/favourite_screen.dart';
 import 'package:tb_movie_app/presentation/theme/app_color.dart';
+import 'package:tb_movie_app/presentation/blocs/login/login_bloc.dart';
+import 'package:tb_movie_app/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
+import 'package:tb_movie_app/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:tb_movie_app/presentation/widget/app_dialog.dart';
 import 'package:tb_movie_app/presentation/widget/logo.dart';
 import 'package:wiredash/wiredash.dart';
@@ -27,7 +30,10 @@ class NavigationDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.7),
+            color: Theme
+                .of(context)
+                .primaryColor
+                .withOpacity(0.7),
             blurRadius: 4,
           ),
         ],
@@ -91,6 +97,18 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               );
             })
+            BlocListener<LoginBloc, LoginState>(
+              listenWhen: (previous, current) => current.logoutNetworkStatus == NetworkStatus.success,
+              listener: (context, state) {
+                Navigator.of(context).pushNamedAndRemoveUntil(RouteList.initial, (route) => false);
+              },
+              child: NavigationListItem(
+                title: TranslationConstants.logout.langTranslate(context),
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                },
+              ),
+            ),
           ],
         ),
       ),

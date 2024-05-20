@@ -5,13 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/common/constants/languages.dart';
 import 'package:tb_movie_app/common/constants/route_constants.dart';
-import 'package:tb_movie_app/common/constants/size_config.dart';
-import 'package:tb_movie_app/common/helpers/helper_functions.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
 import 'package:tb_movie_app/presentation/app_localizations.dart';
 import 'package:tb_movie_app/presentation/blocs/language_bloc/language_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/theme/theme_cubit.dart';
+import 'package:tb_movie_app/presentation/blocs/login/login_bloc.dart';
 import 'package:tb_movie_app/presentation/fade_page_route_builder.dart';
 import 'package:tb_movie_app/presentation/journeys/home/home_screen.dart';
 import 'package:tb_movie_app/presentation/journeys/loading/loading_screen.dart';
@@ -31,6 +30,7 @@ class _MovieAppState extends State<MovieApp> {
   late LanguageBloc _languageBloc;
   late LoadingBloc _loadingBloc;
   late ThemeCubit _themeCubit;
+  late LoginBloc _loginBloc;
 
   @override
   initState() {
@@ -40,6 +40,7 @@ class _MovieAppState extends State<MovieApp> {
     _loadingBloc = getItInstance<LoadingBloc>();
     _themeCubit = getItInstance<ThemeCubit>();
     _themeCubit.loadPreferredTheme();
+    _loginBloc = getItInstance<LoginBloc>();
   }
 
   @override
@@ -47,6 +48,7 @@ class _MovieAppState extends State<MovieApp> {
     _languageBloc.close();
     _loadingBloc.close();
     _themeCubit.close();
+    _loginBloc.close();
     super.dispose();
   }
 
