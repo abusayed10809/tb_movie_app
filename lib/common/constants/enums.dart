@@ -4,3 +4,5 @@ enum NetworkStatus{
   success,
   failure
 }
+
+enum Themes { light, dark }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tb_movie_app/common/constants/enums.dart';
 import 'package:tb_movie_app/common/constants/size_config.dart';
 import 'package:tb_movie_app/dependencyinject/get_it.dart';
+import 'package:tb_movie_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:tb_movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';

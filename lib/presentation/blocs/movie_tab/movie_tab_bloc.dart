@@ -21,6 +21,7 @@ class MovieTabBloc extends Bloc<MovieTabEvent, MovieTabState> {
   }
 
   _onMovieTabChangedEvent(MovieTabChangedEvent event, Emitter<MovieTabState> emit) async {
+    emit(state.copyWith(networkStatus: NetworkStatus.loading));
     Either<AppError, List<MovieEntity>>? moviesEither;
     switch (event.currentTabIndex) {
       case 0:

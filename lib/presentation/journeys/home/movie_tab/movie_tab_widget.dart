@@ -61,7 +61,7 @@ class _MovieTabWidgetState extends State<MovieTabWidget> with SingleTickerProvid
                       case NetworkStatus.initial:
                         return const SizedBox.shrink();
                       case NetworkStatus.loading:
-                        return const SizedBox.shrink();
+                        return loadingData();
                       case NetworkStatus.success:
                         if (state.movies!.isEmpty) {
                           return emptyData(message: TranslationConstants.noMovies.langTranslate(context));

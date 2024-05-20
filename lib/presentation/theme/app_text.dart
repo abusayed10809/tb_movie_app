@@ -35,13 +35,39 @@ class AppText {
         color: AppColor.whiteColor,
       );
 
-  static TextStyle get _whiteCaption => _poppinsTextTheme.caption!.copyWith(
+  static TextStyle get _darkCaption => _poppinsTextTheme.caption!.copyWith(
     fontSize: 14.sp,
-    color: AppColor.whiteColor,
+    color: AppColor.vulcanColor,
     wordSpacing: 0.25,
     letterSpacing: 0.25,
     height: 1.5,
   );
+
+  static TextStyle? get _vulcanHeadline6 =>
+      _whiteHeadline6.copyWith(color: AppColor.vulcanColor);
+
+  static TextStyle? get _vulcanHeadline5 =>
+      _whiteSubtitle1.copyWith(color: AppColor.vulcanColor);
+
+  static TextStyle? get vulcanSubtitle1 =>
+      _whiteSubtitle2.copyWith(color: AppColor.vulcanColor);
+
+  static TextStyle? get vulcanBodyText2 =>
+      _whiteBodyText2.copyWith(color: AppColor.vulcanColor);
+
+  static TextStyle? get _lightCaption =>
+      _darkCaption.copyWith(color: Colors.white);
+
+
+  static getLightTextTheme() => TextTheme(
+    headline6: _vulcanHeadline6,
+    subtitle1: _vulcanHeadline5,
+    subtitle2: vulcanSubtitle1,
+    bodyText2: vulcanBodyText2,
+    button: _whiteButton,
+    caption: _lightCaption,
+  );
+
 
   static getTextTheme() => TextTheme(
         headline6: _whiteHeadline6,
@@ -49,7 +75,7 @@ class AppText {
         subtitle2: _whiteSubtitle2,
         bodyText2: _whiteBodyText2,
         button: _whiteButton,
-        caption: _whiteCaption,
+        caption: _darkCaption,
       );
 }
 
@@ -76,7 +102,14 @@ extension ThemeTextExtension on TextTheme {
     fontWeight: FontWeight.bold,
   );
 
+  TextStyle? get whiteBodyText2 =>
+      vulcanBodyText2.copyWith(color: Colors.white);
+
+
   TextStyle get greyCaption => caption!.copyWith(
     color: Colors.grey,
   );
+
+  TextStyle? get orangeSubtitle1 =>
+      subtitle1?.copyWith(color: Colors.orangeAccent);
 }
